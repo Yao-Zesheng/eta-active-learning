@@ -1,0 +1,18 @@
+{
+  "layers": [
+    2,
+    200,
+    200,
+    200,
+    200,
+    200,
+    1
+  ],
+  "activation": "ReLU",
+  "mlp_parameters": 161601,
+  "ordinary_parameters": 161601,
+  "identical_initial_parameters": true,
+  "valid_initializations": 202,
+  "min_triangle_span": 0.00025185747060685326,
+  "initial_rank_ks": 0.0017754194351893293
+}

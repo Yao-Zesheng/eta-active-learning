@@ -1,0 +1,49 @@
+{
+  "acquisition": "USLW",
+  "seeds": [
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110
+  ],
+  "new_model": "physical x/6 features, 32 physical-uniform node intervals, 9506 Q_ref knots",
+  "extreme_thresholds": {
+    "lo": 0.0002153191643589699,
+    "hi": 0.05758942315538646
+  },
+  "round100": {
+    "eta_lambda_0": {
+      "pdf_grid_KDE_10seed_mean": 0.0027573695737400537,
+      "extreme_mse_10seed_mean": 4.201829243604282e-07
+    },
+    "eta_lambda_1e-9": {
+      "pdf_grid_KDE_10seed_mean": 0.0016074467482095998,
+      "extreme_mse_10seed_mean": 4.1327332184811643e-07
+    },
+    "eta_lambda_1e-6": {
+      "pdf_grid_KDE_10seed_mean": 0.003304697261200385,
+      "extreme_mse_10seed_mean": 3.7272659904133624e-07
+    },
+    "eta_lambda_0.001": {
+      "pdf_grid_KDE_10seed_mean": 0.006263779188972184,
+      "extreme_mse_10seed_mean": 2.6391127906805266e-07
+    },
+    "eta_lambda_1": {
+      "pdf_grid_KDE_10seed_mean": 0.06829482711359999,
+      "extreme_mse_10seed_mean": 0.00025689478962504224
+    },
+    "new_hard_physical": {
+      "pdf_grid_KDE_ensemble": 0.004366763069810454,
+      "pdf_grid_KDE_member_average": 0.00848212153787715,
+      "pdf_continuous_member_average": 0.0005088092555035505,
+      "extreme_mse_ensemble": 4.5295664529057275e-07,
+      "extreme_mse_member_average": 4.6787484722503715e-07
+    }
+  }
+}

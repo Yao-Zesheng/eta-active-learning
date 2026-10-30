@@ -1,0 +1,70 @@
+{
+  "cpu": {
+    "seconds": 5.713898700021673,
+    "params": 161601,
+    "compiled_error": 5.662137425588298e-15,
+    "training": {
+      "stage": "float32_cpu",
+      "seed": 1,
+      "n": 3,
+      "mse": 7.334069148820335e-07,
+      "rmse_normalized": 0.0008563917998685144,
+      "max_abs_error_normalized": 0.001181451838469627,
+      "elapsed_seconds": 3.638164500007406,
+      "adam_updates": 50,
+      "lbfgs_evaluations": 0,
+      "stop_at_goal": false,
+      "rejected_invalid_steps": [],
+      "trace": [
+        {
+          "phase": "adam",
+          "step": 0,
+          "mse": 0.13397947751022773,
+          "rmse_normalized": 0.3660320716962214,
+          "elapsed": 0.06016500003170222
+        },
+        {
+          "phase": "adam",
+          "step": 50,
+          "mse": 2.1286818632114703e-06,
+          "rmse_normalized": 0.0014590002958229551,
+          "elapsed": 3.633636800048407
+        }
+      ]
+    }
+  },
+  "cuda": {
+    "seconds": 1.6389375000144355,
+    "params": 161601,
+    "compiled_error": 1.7763568394002505e-15,
+    "training": {
+      "stage": "float32_cuda",
+      "seed": 1,
+      "n": 3,
+      "mse": 1.431416930302589e-06,
+      "rmse_normalized": 0.0011964183759465537,
+      "max_abs_error_normalized": 0.0014877662623207222,
+      "elapsed_seconds": 1.633390600036364,
+      "adam_updates": 50,
+      "lbfgs_evaluations": 0,
+      "stop_at_goal": false,
+      "rejected_invalid_steps": [],
+      "trace": [
+        {
+          "phase": "adam",
+          "step": 0,
+          "mse": 0.13397946942312738,
+          "rmse_normalized": 0.36603206064923793,
+          "elapsed": 0.6435528000001796
+        },
+        {
+          "phase": "adam",
+          "step": 50,
+          "mse": 7.294195005906668e-06,
+          "rmse_normalized": 0.002700776741218472,
+          "elapsed": 1.6303097000345588
+        }
+      ]
+    }
+  }
+}

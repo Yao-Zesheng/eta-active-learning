@@ -1,0 +1,26 @@
+{
+  "hard_aggregation": "none; each member evaluated separately",
+  "hard_seed": 101,
+  "eta_reference": "original USLW 10-seed mean of ensemble prediction errors for each lambda",
+  "main_pdf_methods": {
+    "hard": "continuous compiled model probability integration",
+    "eta": "original weighted grid gaussian_kde"
+  },
+  "main_extreme_mse": "same original truth thresholds, evaluation points and input-law weights",
+  "round100_members": [
+    {
+      "member": 1,
+      "pdf_continuous": 0.00045005898707867605,
+      "pdf_grid_kde": 0.003732326622580095,
+      "extreme_mse": 2.934662101697834e-07,
+      "training_mse": 2.88923107621734e-07
+    },
+    {
+      "member": 2,
+      "pdf_continuous": 0.0004819723125006745,
+      "pdf_grid_kde": 0.011606138459237275,
+      "extreme_mse": 3.215074009568011e-07,
+      "training_mse": 2.725987220413324e-07
+    }
+  ]
+}

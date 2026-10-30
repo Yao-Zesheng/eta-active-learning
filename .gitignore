@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+
+# 运行产物(本仓库发布时已清除;本地复现产生的这些内容不入库)
+**/results/
+**/oracle_tmp/
+**/mpl_cache/
+**/matlab.log
+**/logs/
+*.tar.gz
+
+# IDE / 系统
+.idea/
+.vscode/
+.DS_Store
