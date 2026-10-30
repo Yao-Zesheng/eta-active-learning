@@ -19,7 +19,7 @@
 ## 1. 仓库结构
 
 ```
-eta-learning/
+eta-active-learning/
 ├── README.md                         # 本文件
 ├── requirements.txt
 ├── ETA_玩具算例运行报告_README.md      # 框架 eta/ 的使用报告(历史文档)
@@ -149,7 +149,46 @@ python plot_tenseed_physical_vs_eta.py         # 十种子版对比图(读取兄
 
 ---
 
-## 5. 预期结果速览(对齐 `figures/` 与 `summary_*.npz`)
+## 5. 发布前冒烟验证(方法与结果)
+
+发布本仓库前,对五个示例工程各做了一次**"原工程 vs 发布副本"同机同命令对拍**:在同一台机器、同一 Python 环境下,分别在原始工程与发布副本中运行同一条冒烟命令,然后逐字段深度比对两侧的 `history.json`(**剔除墙钟时间类字段后要求全等**)。五项全部 PASS(字段差异数=0),证明发布副本与原始工程在数值上完全一致。
+
+**运行方式**(每条命令在原工程与副本各跑一遍,`<ROOT>` 分别为原始工程根与 `eta-active-learning/`):
+
+```bash
+# 1) TOY_2D(USLW 采集)
+cd <ROOT>/myproject/10random_seeds_TOY_2D/_templates/eta
+python -B run.py --lambd 0 --iterations 1 --name smoke
+# 2) TOY_2D_US(US 采集)
+cd <ROOT>/myproject/10random_seeds_TOY_2D_US/_templates/eta
+python -B run.py --lambd 0 --iterations 1 --acq us --name smoke
+# 3) 泊肃叶转捩
+cd <ROOT>/myproject/10random_seeds_pois_transion_2D/_templates/eta
+python -B run.py --lambd 0 --iterations 1 --name smoke
+# 4) MMT_2D(η 基线;每轮含一次 MATLAB 求解器调用)
+cd <ROOT>/myproject/10random_seeds_MMT_2D/_templates/eta
+python -B run.py --lambd 0 --iterations 1 --name smoke
+# 5) 物理网格 hard-PDF(种子 101,round 0)
+cd <ROOT>/myproject/10random_seeds_MMT_2D_PHYSICAL_MESH/hard_s101
+python -B run.py --iterations 0 --threads 8 --device cpu --acq uslw \
+    --lhs-seed 101 --seed-base 1 --mesh 32 --adam 1800 --lbfgs 450 --name smoke
+```
+
+**运行结果**(两树数值逐位一致;下表为末轮关键指标,单侧读数):
+
+| 工程 | 冒烟命令要点 | 末轮关键指标(两树全等) | history 深度比对 |
+|---|---|---|---|
+| TOY_2D | λ=0,USLW,1 次迭代 | RMSE=0.197558,e=0.317270,top1=0.252386 | **PASS(0 差异)** |
+| TOY_2D_US | λ=0,US,1 次迭代 | RMSE=0.195117,e=0.344974,top1=0.256394 | **PASS(0 差异)** |
+| 泊肃叶 | λ=0,USLW,1 次迭代 | RMSE=0.059618,e=5.796243(4 点冷启动的正常量级),top1=0.148310 | **PASS(0 差异)** |
+| MMT_2D | λ=0,USLW,1 次迭代(含 MATLAB) | RMSE=0.006531,e=0.065277,top1=0.017082 | **PASS(0 差异)** |
+| 物理网格 hard | 种子 101,round 0(含 MATLAB) | RMSE=0.007224,e_cont 成员=4.2e-4/4.4e-4,极端 MSE=5.4e-5/9.8e-5 | **PASS(0 差异)** |
+
+> 比对方法:加载两侧 `history.json`,递归比较全部字段(浮点按精确相等),仅跳过 `seconds`/`elapsed_this_session`/`training` 等墙钟与日志字段。冒烟产生的 `results/smoke`、`oracle_tmp` 已在两侧清理。任何人 clone 本仓库后执行上述命令,应得到与表中一致的数值(同机同版本 Python/PyTorch/MATLAB 前提下;跨环境允许浮点级漂移)。
+
+---
+
+## 6. 预期结果速览(对齐 `figures/` 与 `summary_*.npz`)
 
 | 系统 | 关键结论 |
 |---|---|
@@ -162,7 +201,7 @@ python plot_tenseed_physical_vs_eta.py         # 十种子版对比图(读取兄
 
 ---
 
-## 6. 常见问题
+## 7. 常见问题
 
 - **MATLAB 相关**:报 `MATLAB executable not found` → 设置 `MMATLAB_EXE`;求解器与网格真值在 MATLAB 2020b/Linux 与 R2026a/Windows 间已验证逐位一致;每次查询约 +15-25 秒(MATLAB 启动占大头)。
 - **确定性**:代码启用 `torch.use_deterministic_algorithms(True)` 与显式种子(成员种子 = 基+2k/基+2k+1,逐轮冷重启);同机同版本结果可复现,跨机/跨 torch 版本允许数值级漂移。
@@ -170,6 +209,6 @@ python plot_tenseed_physical_vs_eta.py         # 十种子版对比图(读取兄
 - **`setup_cases.py` 报 refusing to overwrite**:case 文件夹已存在(仓内自带);如需从模板重建,先自行移除旧 case 目录。
 - **想换一个新系统?** 按 `10random_seeds_MMT_2D/SYSTEM_SWAP_GUIDE.md` 的 §0 契约表:所有约定(输入律、候选分布、网络输入坐标、评估权重、hard 网格坐标)都定义在 `problem.py`,`run.py/acquisition.py` 零改动。
 
-## 7. 引用
+## 8. 引用
 
 如使用本代码,请引用本仓库。方法细节与三系统完整结论见 `figures/` 各图及各工程 `summary_*.npz`。
