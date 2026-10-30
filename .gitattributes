@@ -1,0 +1,8 @@
+* text=auto
+*.npz binary
+*.mat binary
+*.bin binary
+*.gz binary
+*.png binary
+*.pdf binary
+*.svg -text
