@@ -22,7 +22,6 @@
 eta-active-learning/
 ├── README.md                         # 本文件
 ├── requirements.txt
-├── ETA_玩具算例运行报告_README.md      # 框架 eta/ 的使用报告(历史文档)
 ├── eta/                              # 上游框架代码(src / docs / notebooks;示例不依赖它,可独立阅读)
 └── myproject/                        # 五个自包含示例工程(下载即可运行,互不依赖)
     ├── 10random_seeds_TOY_2D/            # TOY 系统,USLW 采集,10 种子
